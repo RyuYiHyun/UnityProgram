@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,16 +20,23 @@ public class Key : MonoBehaviour
         }
         KeyData data = KeyTable.Data.DicKeyData[m_keyCode];
         var key = data.DefaultKey;
-
-        if(m_keyCode == VirtualKeyCode.SPACE)// space
+        if(m_keyCode == VirtualKeyCode.HANGUL)//한영
+        {
+            KeyTable.Data.isKorean = !KeyTable.Data.isKorean;
+            KeyTable.Data.TransData();
+            return;
+        }
+        else if(m_keyCode == VirtualKeyCode.SPACE)// space
         {
             KeyTable.Data.SpaceData();
+            return;
         }
-        if (m_keyCode == VirtualKeyCode.BACK) // back space
+        else if (m_keyCode == VirtualKeyCode.BACK) // back space
         {
             KeyTable.Data.DeleteData();
+            return;
         }
-        if (m_keyCode == VirtualKeyCode.CAPITAL) // caps lock 버튼
+        else if (m_keyCode == VirtualKeyCode.CAPITAL) // caps lock 버튼
         {
             if (KeyTable.Data.isCaps)
             {
@@ -43,16 +48,27 @@ public class Key : MonoBehaviour
                 KeyTable.Data.isShift = true;
                 KeyTable.Data.isCaps = true;
             }
+            return;
         }
-        if (m_keyCode == VirtualKeyCode.SHIFT) // shift 버튼
+        else if (m_keyCode == VirtualKeyCode.SHIFT) // shift 버튼
         {
             KeyTable.Data.isShift = true;
+            return;
         }
-        if (m_keyCode >= VirtualKeyCode.VK_1 && m_keyCode <= VirtualKeyCode.VK_0)
+        else if (m_keyCode >= VirtualKeyCode.VK_1 && m_keyCode <= VirtualKeyCode.VK_0)
         {// 숫자키 
-            // 숫자 구현하기
+            if(KeyTable.Data.isShift)
+            {
+                key = string.IsNullOrWhiteSpace(data.ShiftKey.ToString()) ? key : data.ShiftKey;
+            }
+            KeyTable.Data.InputData(key);
+            if (!KeyTable.Data.isCaps)
+            {
+                KeyTable.Data.isShift = false;
+            }
+            return;
         }
-        if (m_keyCode >= VirtualKeyCode.VK_A && m_keyCode <= VirtualKeyCode.VK_Z)
+        else if (m_keyCode >= VirtualKeyCode.VK_A && m_keyCode <= VirtualKeyCode.VK_Z)
         {// 문자 키 
             if (KeyTable.Data.isKorean)
             {// 한글
@@ -72,11 +88,53 @@ public class Key : MonoBehaviour
             }
             else
             {// 영어
-                // 영어 구현하기
+                if(KeyTable.Data.isShift)
+                {
+                    key = char.ToUpper(key);
+                }
+                else
+                {
+                    key = char.ToLower(key);
+                }
+                KeyTable.Data.InputData(key);
+                if (!KeyTable.Data.isCaps)
+                {
+                    KeyTable.Data.isShift = false;
+                }
+                return;
             }
         }
-        // 다른 특수 키 구현하기
-        
-        
+        else if(m_keyCode == VirtualKeyCode.RETURN)
+        {
+            KeyTable.Data.EnterData();
+            if (!KeyTable.Data.isCaps)
+            {
+                KeyTable.Data.isShift = false;
+            }
+        }
+        else if (m_keyCode == VirtualKeyCode.TAB)
+        {
+            KeyTable.Data.TabData();
+            if (!KeyTable.Data.isCaps)
+            {
+                KeyTable.Data.isShift = false;
+            }
+        }
+        else
+        {
+            if(data.DefaultKey != ' ')
+            {
+                // 다른 특수 키 구현하기
+                if (KeyTable.Data.isShift)
+                {
+                    key = string.IsNullOrWhiteSpace(data.ShiftKey.ToString()) ? key : data.ShiftKey;
+                }
+                KeyTable.Data.InputData(key);
+                if (!KeyTable.Data.isCaps)
+                {
+                    KeyTable.Data.isShift = false;
+                }
+            }
+        }
     }
 }

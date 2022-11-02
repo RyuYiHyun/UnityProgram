@@ -1,10 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Apple.ReplayKit;
 using UnityEngine.UI;
-using UnityEngine.Windows;
 
 
 public class KeyData
@@ -337,7 +334,7 @@ public class KeyTable : MonoBehaviour
             if (makeStr == "") // 아무 입력이 없었음
             {
                 makeStr += _input;
-                edittext.text = completeStr + makeStr; // 임시
+                edittext.text = completeStr + makeStr; 
                 return;
             }
             if (FindIndex(Convert.ToChar(makeStr), HANGUL_TYPE.CHO) != -1)
@@ -345,7 +342,7 @@ public class KeyTable : MonoBehaviour
                 char result = Combine_Hangul(Convert.ToChar(makeStr), _input);
                 makeStr = "";
                 makeStr += result;
-                edittext.text = completeStr + makeStr; // 임시
+                edittext.text = completeStr + makeStr;
                 return;
             }
             else if (FindIndex(Convert.ToChar(makeStr), HANGUL_TYPE.JUNG) != -1)
@@ -356,7 +353,7 @@ public class KeyTable : MonoBehaviour
                 {// 합성 가능
                     makeStr = "";
                     makeStr += result;
-                    edittext.text = completeStr + makeStr; // 임시
+                    edittext.text = completeStr + makeStr; 
                     return;
                 }
                 else
@@ -365,7 +362,7 @@ public class KeyTable : MonoBehaviour
                     edittext.text = completeStr;
                     makeStr = "";
                     makeStr += _input;
-                    edittext.text = completeStr + makeStr; // 임시
+                    edittext.text = completeStr + makeStr; 
                     return;
                 }
             }
@@ -384,7 +381,7 @@ public class KeyTable : MonoBehaviour
                     char result = Combine_Hangul(_jong2, _input);
                     makeStr = "";
                     makeStr += result;
-                    edittext.text = completeStr + makeStr; // 임시
+                    edittext.text = completeStr + makeStr; 
                     return;
                 }
             }
@@ -412,7 +409,7 @@ public class KeyTable : MonoBehaviour
                     completeStr += result1;
                     makeStr = "";
                     makeStr += result2;
-                    edittext.text = completeStr + makeStr; // 임시
+                    edittext.text = completeStr + makeStr;
                     return;
                 }
                 else
@@ -424,7 +421,7 @@ public class KeyTable : MonoBehaviour
                         completeStr += result1;
                         makeStr = "";
                         makeStr += result2;
-                        edittext.text = completeStr + makeStr; // 임시
+                        edittext.text = completeStr + makeStr;
                         return;
                     }
                     else
@@ -435,7 +432,7 @@ public class KeyTable : MonoBehaviour
                             edittext.text = completeStr;
                             makeStr = "";
                             makeStr += _input;
-                            edittext.text = completeStr + makeStr; // 임시
+                            edittext.text = completeStr + makeStr; 
                         }
                         else
                         {// 초성 + 중성 -> ex) 고 -> 과 또는 고ㅗ  (조건부 합성)
@@ -445,7 +442,7 @@ public class KeyTable : MonoBehaviour
                                 char combine = Combine_Hangul(_cho, result);
                                 makeStr = "";
                                 makeStr += combine;
-                                edittext.text = completeStr + makeStr; // 임시
+                                edittext.text = completeStr + makeStr;
                                 return;
                             }
                             else
@@ -454,7 +451,7 @@ public class KeyTable : MonoBehaviour
                                 edittext.text = completeStr;
                                 makeStr = "";
                                 makeStr += _input;
-                                edittext.text = completeStr + makeStr; // 임시
+                                edittext.text = completeStr + makeStr; 
                                 return;
                             }
                         }
@@ -464,7 +461,34 @@ public class KeyTable : MonoBehaviour
         }
     }
     #endregion
-
+    public void TransData()
+    {
+        if (makeStr == "") // 쓰던 문자가 없을때
+        {
+            edittext.text = completeStr;
+        }
+        else
+        {
+            completeStr += makeStr;
+            makeStr = "";
+            edittext.text = completeStr;
+        }
+    }
+    public void InputData(char _input)
+    {
+        if (makeStr == "") // 쓰던 문자가 없을때
+        {
+            completeStr += _input;
+            edittext.text = completeStr;
+        }
+        else
+        {
+            completeStr += makeStr;
+            completeStr += _input;
+            makeStr = "";
+            edittext.text = completeStr;
+        }
+    }
     public void DeleteData()
     {
         if (makeStr == "") // 쓰던 문자가 없을때
@@ -473,19 +497,9 @@ public class KeyTable : MonoBehaviour
             {
                 if (completeStr.Length > 0)
                 {
-                    int n = completeStr.LastIndexOf("\n");
-                    if (n == -1)
-                    {
-                        completeStr = completeStr.Remove(completeStr.Length - 1);
-                        edittext.text = completeStr;
-                        return;
-                    }
-                    else
-                    {
-                        completeStr = completeStr.Remove(completeStr.Length - 2);
-                        edittext.text = completeStr;
-                        return;
-                    }
+                    completeStr = completeStr.Remove(completeStr.Length - 1);
+                    edittext.text = completeStr;
+                    return;
                 }
             }
         }
@@ -584,7 +598,6 @@ public class KeyTable : MonoBehaviour
             }
         }
     }
-
     public void SpaceData()
     {
         if (makeStr == "") // 쓰던 문자가 없을때
@@ -600,6 +613,37 @@ public class KeyTable : MonoBehaviour
             edittext.text = completeStr;
         }
     }
+    public void EnterData()
+    {
+        if (makeStr == "") // 쓰던 문자가 없을때
+        {
+            completeStr += "\n";
+            edittext.text = completeStr;
+        }
+        else
+        {
+            completeStr += makeStr;
+            completeStr += "\n";
+            makeStr = "";
+            edittext.text = completeStr;
+        }
+    }
+    public void TabData()
+    {
+        if (makeStr == "") // 쓰던 문자가 없을때
+        {
+            completeStr += "\t";
+            edittext.text = completeStr;
+        }
+        else
+        {
+            completeStr += makeStr;
+            completeStr += "\t";
+            makeStr = "";
+            edittext.text = completeStr;
+        }
+    }
+
 
     #region Private Method
     private void MappingKeys()
@@ -670,6 +714,8 @@ public class KeyTable : MonoBehaviour
 
 public enum VirtualKeyCode
 {
+    //Do Not Any Action
+    VK_NONE = -1,
     //NumKey
     VK_1,
     VK_2,
