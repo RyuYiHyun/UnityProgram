@@ -19,7 +19,7 @@ public class Key : MonoBehaviour
             return;
         }
         KeyData data = KeyTable.Data.DicKeyData[m_keyCode];
-        var key = data.DefaultKey;
+        char key = data.DefaultKey;
         if(m_keyCode == VirtualKeyCode.HANGUL)//ÇÑ¿µ
         {
             KeyTable.Data.isKorean = !KeyTable.Data.isKorean;

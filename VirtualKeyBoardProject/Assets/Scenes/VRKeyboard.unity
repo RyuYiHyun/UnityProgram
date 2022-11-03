@@ -2551,33 +2551,6 @@ MonoBehaviour:
   isKorean: 1
   isShift: 0
   isCaps: 0
-  completeStr: 
-  makeStr: 
-  cho: 313132313431373138313931413142314331453146314731483149314a314b314c314d314e31
-  jung: 4f3150315131523153315431553156315731583159315a315b315c315d315e315f316031613162316331
-  jong: 2000313132313331343135313631373139313a313b313c313d313e313f31403141314231443145314631473148314a314b314c314d314e31
-  JungComb: 583159315a315d315e315f316231
-  JungSplit:
-  - "\u3157\u314F"
-  - "\u3157\u3150"
-  - "\u3157\u3163"
-  - "\u315C\u3153"
-  - "\u315C\u3154"
-  - "\u315C\u3163"
-  - "\u3161\u3163"
-  JongComb: 3331353136313a313b313c313d313e313f3140314431
-  JongSplit:
-  - "\u3131\u3145"
-  - "\u3134\u3148"
-  - "\u3134\u314E"
-  - "\u3139\u3131"
-  - "\u3139\u3141"
-  - "\u3139\u3142"
-  - "\u3139\u3145"
-  - "\u3139\u314C"
-  - "\u3139\u314D"
-  - "\u3139\u314E"
-  - "\u3144"
 --- !u!1 &291892705
 GameObject:
   m_ObjectHideFlags: 0
@@ -3124,8 +3097,8 @@ Camera:
   m_GameObject: {fileID: 370135282}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0.019607844}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.21176471, g: 0.30588236, b: 0.4509804, a: 0.019607844}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -3382,6 +3355,82 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -70}
   m_SizeDelta: {x: 1030, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &449664653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 449664654}
+  - component: {fileID: 449664656}
+  - component: {fileID: 449664655}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &449664654
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449664653}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 709210053}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -15, y: -229}
+  m_SizeDelta: {x: 1582.3638, y: 590}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &449664655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449664653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 5102c1993c9f63c4a92c2e237d2501b5, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &449664656
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449664653}
+  m_CullTransparentMesh: 1
 --- !u!1 &473475431
 GameObject:
   m_ObjectHideFlags: 0
@@ -4761,12 +4810,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -4807,6 +4856,7 @@ RectTransform:
   m_Children:
   - {fileID: 733863122}
   - {fileID: 288205940}
+  - {fileID: 449664654}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

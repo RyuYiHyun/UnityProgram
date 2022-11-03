@@ -16,6 +16,9 @@ public class KeyTable : MonoBehaviour
     public static KeyTable Data = null;
     private void Awake()
     {
+        Screen.SetResolution(1536, 864, false);
+
+
         if (Data == null) //instance가 null. 즉, 시스템상에 존재하고 있지 않을때
         {
             Data = this; //내자신을 instance로 넣어줍니다.
@@ -40,40 +43,40 @@ public class KeyTable : MonoBehaviour
     public bool isKorean;
     public bool isShift;
     public bool isCaps;
-    public string completeStr = "";
-    public string makeStr = "";
+    private string completeStr = "";
+    private string makeStr = "";
 
 
     #region Hangul
-    public enum HANGUL_TYPE
+    private enum HANGUL_TYPE
     {
         CHO, JUNG, JONG
     }
 
     // 초성INDEX
-    public char[] cho = {
+    private char[] cho = {
           'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ',
           'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ',
           'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ' };
     const int cho_count = 19;
     // 중성INDEX
-    public char[] jung = {
+    private char[] jung = {
           'ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ',
           'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 'ㅘ', 'ㅙ',
           'ㅚ', 'ㅛ', 'ㅜ', 'ㅝ', 'ㅞ', 'ㅟ',
           'ㅠ', 'ㅡ', 'ㅢ', 'ㅣ'};
     const int jung_count = 21;
     // 종성INDEX
-    public char[] jong = {
+    private char[] jong = {
           ' ', 'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ',
           'ㄺ', 'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄿ', 'ㅀ', 'ㅁ',
           'ㅂ', 'ㅄ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'};
     const int jong_count = 28;
     // 조합INDEX
-    public char[] JungComb = { 'ㅘ', 'ㅙ', 'ㅚ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅢ' };
-    public string[] JungSplit = { "ㅗㅏ", "ㅗㅐ", "ㅗㅣ", "ㅜㅓ", "ㅜㅔ", "ㅜㅣ", "ㅡㅣ" };
-    public char[] JongComb = { 'ㄳ', 'ㄵ', 'ㄶ', 'ㄺ', 'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄿ', 'ㅀ', 'ㅄ' };
-    public string[] JongSplit = { "ㄱㅅ", "ㄴㅈ", "ㄴㅎ", "ㄹㄱ", "ㄹㅁ", "ㄹㅂ", "ㄹㅅ", "ㄹㅌ", "ㄹㅍ", "ㄹㅎ", "ㅄ" };
+    private char[] JungComb = { 'ㅘ', 'ㅙ', 'ㅚ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅢ' };
+    private string[] JungSplit = { "ㅗㅏ", "ㅗㅐ", "ㅗㅣ", "ㅜㅓ", "ㅜㅔ", "ㅜㅣ", "ㅡㅣ" };
+    private char[] JongComb = { 'ㄳ', 'ㄵ', 'ㄶ', 'ㄺ', 'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄿ', 'ㅀ', 'ㅄ'};
+    private string[] JongSplit = { "ㄱㅅ", "ㄴㅈ", "ㄴㅎ", "ㄹㄱ", "ㄹㅁ", "ㄹㅂ", "ㄹㅅ", "ㄹㅌ", "ㄹㅍ", "ㄹㅎ", "ㅂㅅ"};
 
 
     public const int BASE_MOD = 0xAC00;        // 처음 값 (가)
@@ -91,7 +94,7 @@ public class KeyTable : MonoBehaviour
     public const int START_JONG = 0x11A8;        // 음성범위 MIN(ㄱ)
     public const int LAST_JONG = 0x11C3;        // 음성범위 MAX(ㅎ)
 
-    public int FindIndex(char _char, HANGUL_TYPE _type)
+    private int FindIndex(char _char, HANGUL_TYPE _type)
     {
         int index = 0;
         char[] hanguls = cho;
@@ -117,7 +120,7 @@ public class KeyTable : MonoBehaviour
         }
         return -1;
     }
-    public char FindChar(int index, HANGUL_TYPE _type)
+    private char FindChar(int index, HANGUL_TYPE _type)
     {
         char[] hanguls = cho;
         switch (_type)
